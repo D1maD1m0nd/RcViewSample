@@ -26,8 +26,9 @@ class UserSampleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.button.setOnClickListener {
-            adapter.updateData(generateSampleData())
+            adapter.setData(generateSampleData())
         }
+        adapter.setHasStableIds(true)
         binding.rcView.adapter = adapter
         binding.rcView.layoutManager = LinearLayoutManager(requireContext())
         adapter.setData(generateSampleData())

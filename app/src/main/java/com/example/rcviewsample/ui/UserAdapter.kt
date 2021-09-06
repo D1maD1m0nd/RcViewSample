@@ -17,8 +17,8 @@ class UserAdapter(
 
     fun setData(newData : List<Pair<User, Boolean>>) {
         data.addAll(newData)
-        notifyItemRangeInserted(0, newData.size)
-
+        //notifyItemRangeInserted(0, newData.size)
+        notifyDataSetChanged()
     }
 
     fun updateData(newData : List<Pair<User, Boolean>>) {
@@ -32,7 +32,7 @@ class UserAdapter(
         Log.d("DEBUGGTAG", viewType.toString() )
         return  when(viewType) {
             ViewHolderEnums.USER.type -> UserActiveViewHolder(inflater.inflate(R.layout.active_user_item, parent, false) as View)
-            ViewHolderEnums.UNUSER.type -> UserUnactiveViewHolder(inflater.inflate(R.layout.unactive_user_item, parent, false) as View)
+            ViewHolderEnums.UNUSER.type -> UserInactiveViewHolder(inflater.inflate(R.layout.unactive_user_item, parent, false) as View)
             else ->  UserActiveViewHolder(inflater.inflate(R.layout.active_user_item, parent, false) as View)
         }
     }
@@ -43,7 +43,9 @@ class UserAdapter(
 
     override fun getItemCount() = data.size
 
-
+    override fun getItemId(position: Int): Long {
+        return data[position].first.hashCode().toLong()
+    }
     override fun getItemViewType(position: Int): Int {
         return when {
             position == 0 -> ViewHolderEnums.HEADER.type
@@ -62,9 +64,10 @@ class UserAdapter(
         }
     }
 
-    inner class UserUnactiveViewHolder(view : View) : BaseViewHolder(view) {
+    inner class UserInactiveViewHolder(view : View) : BaseViewHolder(view) {
         private val binding: UnactiveUserItemBinding = UnactiveUserItemBinding.bind(view)
         override fun bind(dataItem: Pair<User, Boolean>) {
+
             binding.idUser.text  = dataItem.first.id.toString()
             binding.nameUser.text = dataItem.first.name  +  " " +dataItem.first.active
             binding.ageUser.text = dataItem.first.age.toString()
