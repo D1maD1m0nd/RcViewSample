@@ -1,4 +1,4 @@
-package com.example.rcviewsample.ui
+package com.example.rcviewsample.ui.user_rc_fragment
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,17 +11,16 @@ import com.example.rcviewsample.databinding.UnactiveUserItemBinding
 import com.example.rcviewsample.model.User
 import com.example.rcviewsample.model.ViewHolderEnums
 
-class UserAdapter(
-) : RecyclerView.Adapter<BaseViewHolder>() {
+class UserAdapter : RecyclerView.Adapter<BaseViewHolder>() {
     private var data: ArrayList<Pair<User, Boolean>> = ArrayList()
 
-    fun setData(newData : List<Pair<User, Boolean>>) {
+    fun setData(newData: List<Pair<User, Boolean>>) {
         data.addAll(newData)
-        //notifyItemRangeInserted(0, newData.size)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(0, newData.size)
+
     }
 
-    fun updateData(newData : List<Pair<User, Boolean>>) {
+    fun updateData(newData: List<Pair<User, Boolean>>) {
         val lastPos = itemCount
         data.addAll(newData)
         notifyItemRangeInserted(lastPos - 1, newData.size)
@@ -44,7 +43,7 @@ class UserAdapter(
     override fun getItemCount() = data.size
 
     override fun getItemId(position: Int): Long {
-        return data[position].first.hashCode().toLong()
+        return data[position].first.id.hashCode().toLong()
     }
     override fun getItemViewType(position: Int): Int {
         return when {

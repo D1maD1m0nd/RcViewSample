@@ -1,4 +1,4 @@
-package com.example.rcviewsample.ui
+package com.example.rcviewsample.ui.user_rc_fragment
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

@@ -1,10 +1,10 @@
-package com.example.rcviewsample.ui
+package com.example.rcviewsample.ui.user_rc_fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rcviewsample.databinding.FragmentUserSampleBinding
 import com.example.rcviewsample.model.User
@@ -26,7 +26,7 @@ class UserSampleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.button.setOnClickListener {
-            adapter.setData(generateSampleData())
+            adapter.updateData(generateSampleData())
         }
         adapter.setHasStableIds(true)
         binding.rcView.adapter = adapter
